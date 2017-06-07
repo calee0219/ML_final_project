@@ -7,8 +7,11 @@ import shlex
 loans = pd.read_csv("./loans_data.csv")
 # loans.plot(kind="scatter", x="dti", y="safe_loans")
 plt.figure(figsize=(10, 16))
-fig = sns.pairplot(loans, hue="safe_loans", size=3)
-fig.savefig("output.png")
+safe = sns.pairplot(loans[loans.safe_loans == 1], hue="safe_loans", size=10, dropna=True)
+safe.savefig("safe_output.png")
+
+unsafe = sns.pairplot(loans[loans.safe_loans == -1], hue="safe_loans", size=10, dropna=True)
+unsafe.savefig("unsafe_output.png")
 # sns.plt.show()
 
 # fname='./test.pdf'
